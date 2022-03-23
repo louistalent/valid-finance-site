@@ -1,17 +1,25 @@
 
 const mysql = require('mysql');
 
+require("dotenv").config()
+
+const host = process.env.HOST
+const user = process.env.USER
+const password = process.env.PASSWORD
+const database = process.env.DATABASE
+
+
 var con = mysql.createConnection({
-  host: "127.0.0.1",
-  user: "root",
-  password: ""
+  host,
+  user,
+  password
 });
 
 let connection = mysql.createConnection({
-  host: '127.0.0.1',
-  user: 'root',
-  password: '',
-  database: 'transhuman'
+  host,
+  user,
+  password,
+  database
 });
 
 con.connect(function (err) {
