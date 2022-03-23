@@ -23,7 +23,10 @@ let connection = mysql.createConnection({
 });
 
 con.connect(function (err) {
-  if (err) throw err;
+  if (err) {
+    console.log('connect failed');
+    throw err;
+  };
   console.log("Connected!");
   con.query("CREATE DATABASE IF NOT EXISTS transhuman", function (err, result) {
     if (err) throw err;
