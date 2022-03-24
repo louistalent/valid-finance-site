@@ -12,7 +12,7 @@ const ProposalVoting = async (req, res) => {
         const { account, proposal } = req.body;
         if (proposal === '') {
             // return res.send("empty");
-            throw new Error("empty");
+            throw new Error('error')("empty");
         }
         var today = new Date();
         var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -21,14 +21,14 @@ const ProposalVoting = async (req, res) => {
 
         const q = `SELECT * FROM usersvoting WHERE account='${account}'`;
         con.query(q, function (err, result) {
-            if (err) throw err;
+            if (err) throw new Error('error');
 
             if (result.length > 0) {
                 res.send('exist')
             } else {
                 const query = `INSERT INTO usersvoting (account, proposal, date) VALUES ('${account}','${proposal}','${dateTime}')`;
                 con.query(query, function (err, result) {
-                    if (err) throw err;
+                    if (err) throw new Error('error');
                     res.send("success");
                 });
             }
@@ -36,6 +36,7 @@ const ProposalVoting = async (req, res) => {
 
 
     } catch (err) {
+        console.log(err)
         res.send(err.message)
     }
 
@@ -45,11 +46,13 @@ const getVoters = async (req, res) => {
 
         const q = `SELECT * FROM usersvoting ORDER BY date ASC`;
         con.query(q, function (err, result) {
-            if (err) throw err;
+            if (err) throw new Error('error');
             res.send(result);
         });
 
+
     } catch (err) {
+        console.log(err)
         res.send(err.message)
     }
 }
@@ -62,23 +65,23 @@ const tokenVoting = async (req, res) => {
         // token address search
         const q = `SELECT * FROM tokenvoting WHERE address='${address}'`;
         con.query(q, function (err, result1) {
-            if (err) throw err;
+            if (err) throw new Error('error');
             // address register check
             if (result1.length > 0) {
                 const query = `SELECT * FROM users_check_token WHERE account='${account}' AND address ='${address}'`;
                 con.query(query, function (err, user) {
-                    if (err) throw err;
+                    if (err) throw new Error('error');
 
                     if (user.length > 0) {
                         res.send('exist');
                     } else {
                         const query = `INSERT INTO users_check_token (address,account) VALUES ('${address}','${account}')`;
                         con.query(query, function (err, result) {
-                            if (err) throw err;
+                            if (err) throw new Error('error');
                             const q = `UPDATE tokenvoting SET number = '${result1[0].number + 1}' WHERE address='${address}'`;
                             con.query(q, function (err, result3) {
                                 if (err)
-                                    throw err;
+                                    throw new Error('error');
                                 res.send('success');
                             })
                         });
@@ -89,10 +92,10 @@ const tokenVoting = async (req, res) => {
             } else {
                 const query = `INSERT INTO tokenvoting (number,symbol, address, logoURI) VALUES ('1','${symbol}','${address}','${logoURI}')`;
                 con.query(query, function (err, result) {
-                    if (err) throw err;
+                    if (err) throw new Error('error');
                     const query = `INSERT INTO users_check_token (address,account) VALUES ('${address}','${account}')`;
                     con.query(query, function (err, result) {
-                        if (err) throw err;
+                        if (err) throw new Error('error');
                         res.send("success");
                     });
                 })
@@ -101,6 +104,7 @@ const tokenVoting = async (req, res) => {
 
 
     } catch (err) {
+        console.log(err)
         res.send(err.message)
     }
 }
@@ -110,10 +114,11 @@ const getTokenVoting = async (req, res) => {
         const q = "SELECT * FROM tokenvoting ORDER BY number DESC";
         con.query(q, function (err, datas) {
             if (err)
-                throw err;
+                throw new Error('error');
             res.send(datas);
         })
     } catch (err) {
+        console.log(err)
         res.send(err.message)
     }
 }

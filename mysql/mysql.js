@@ -3,10 +3,15 @@ const mysql = require('mysql');
 
 require("dotenv").config()
 
-const host = process.env.HOST
-const user = process.env.USER
-const password = process.env.PASSWORD
-const database = process.env.DATABASE
+// const host = process.env.HOST
+// const user = process.env.USER
+// const password = process.env.PASSWORD
+// const database = process.env.DATABASE
+// 
+const host = '185.25.48.201';
+const user = 'root';
+const password = 'R123!@#';
+const database = 'transhuman';
 
 
 var con = mysql.createConnection({
@@ -34,7 +39,6 @@ con.connect(function (err) {
     let con2 = connection.connect(function (err) {
       if (err) throw err;
 
-      console.log('Mysql connect: ', con2)
       // ********* mailverify **************
       var mailverify = "CREATE TABLE IF NOT EXISTS `mailverify`(\
     `pk` int(255) unsigned NOT NULL AUTO_INCREMENT,\
