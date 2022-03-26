@@ -104,20 +104,19 @@ const getChartData = async (req, res) => {
 }
 
 const getTradingHistory = async (req, res) => {
-    console.log('getTradingHistory')
-    const api = `https://io3.dexscreener.io/u/search/pairs?q=${req.body.address}`
-    await axios.get(api)
-        .then(result => {
-            const History = `https://io12.dexscreener.io/u/trading-history/recent/${result.data.pairs[0].platformId}/${result.data.pairs[0].pairAddress}`;
-            axios.get(History)
-                .then(result => {
-                    console.log('result : ', result)
-                    res.send(result.data);
-                })
-        })
-        .catch((err) => {
-            res.send(err)
-        })
+    try {
+        console.log('getTradingHistory')
+        const api = `https://io3.dexscreener.io/u/search/pairs?q=${req.body.address}`
+        const result = await axios.get(api);
+        console.log('first res: ', result);
+        const History = `https://io12.dexscreener.io/u/trading-history/recent/${result.data.pairs[0].platformId}/${result.data.pairs[0].pairAddress}`;
+        const res_his = await axios.get(History)
+        console.log('second res: ', res_his);
+        res.send(res_his.data);
+    } catch (error) {
+        console.log(error)
+        res.send(error)
+    }
 }
 
 const UploadAds = async (req, res) => {
