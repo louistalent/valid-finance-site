@@ -21,6 +21,7 @@ app.use((req, res, next) => {
     if (req.method === 'OPTIONS') {
         res.header("Access-Control-Allow-Methods", "PUT, POST, DELETE, GET");
         return res.status(200).json({});
+
     }
     next();
 });
@@ -28,6 +29,7 @@ app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'html')
 
 global.appRoot = path.resolve(__dirname);
+
 
 app.use('/trending', TrendingApi);
 app.use('/users', usersRouter);
