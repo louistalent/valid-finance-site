@@ -1,0 +1,25 @@
+var _path, _g;
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+import * as React from "react";
+
+function SvgBscSymbol(props) {
+  return /*#__PURE__*/React.createElement("svg", _extends({
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 100 100"
+  }, props), _path || (_path = /*#__PURE__*/React.createElement("path", {
+    d: "M50 0A50 50 0 110 50 50 50 0 0150 0z",
+    fill: "#f0b90b"
+  })), _g || (_g = /*#__PURE__*/React.createElement("g", {
+    fill: "#fff"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M37.063 44.63l7.57-7.547 1.596-1.595 3.783-3.784L62.896 44.63l7.5-7.546-20.383-20.416-20.45 20.416z"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M42.492 49.988l7.53-7.53 7.531 7.53-7.53 7.53z"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M62.896 55.387L50.008 68.275l-4.525-4.525-.833-.833-7.588-7.53-7.5 7.5 20.45 20.417 20.384-20.417zM16.666 50.008l7.53-7.53 7.532 7.53-7.531 7.531zM68.275 50.004l7.53-7.53 7.531 7.53-7.53 7.53z"
+  }))));
+}
+
+export default SvgBscSymbol;
