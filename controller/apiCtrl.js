@@ -42,18 +42,17 @@ const Removetoken = (req, res) => {
 }
 
 const GetPrice = async (req, res) => {
-
+    console.log('GetPrice called')
     let response = null;
     new Promise(async (resolve, reject) => {
         try {
             response = await axios.get('https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=5000&convert=USD', {
                 headers: {
-                    'X-CMC_PRO_API_KEY': '7a932787-01b6-4092-82d2-71fb96ec7a12',
+                    'X-CMC_PRO_API_KEY': '47017d97-78fd-4d86-88e8-8b031e44bd3b',
                 },
             });
         } catch (ex) {
             response = null;
-            console.log(ex);
             reject(ex);
         }
         if (response.data) {
