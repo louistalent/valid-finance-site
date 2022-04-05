@@ -48,7 +48,7 @@ const GetPrice = async (req, res) => {
         try {
             response = await axios.get('https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=5000&convert=USD', {
                 headers: {
-                    'X-CMC_PRO_API_KEY': '47017d97-78fd-4d86-88e8-8b031e44bd3b',
+                    'X-CMC_PRO_API_KEY': 'd163c519-7b42-448b-8870-2cfce809247b',
                 },
             });
         } catch (ex) {
@@ -61,12 +61,15 @@ const GetPrice = async (req, res) => {
     });
 }
 
+
 const GetToken = async (req, res) => {
     // eth 
     // bsc
     // polygon
     // fantom
     // avalanche
+    console.log("GetToken : ", req.body.value);
+
     const api = `https://api.dex.guru/v2/tokens/search/${req.body.value}?network=bsc,eth,polygon,fantom,avalanche`;
     await axios.get(api)
         .then(result => {
@@ -90,8 +93,18 @@ const GetOptionlist = async (req, res) => {
 }
 
 const getChartData = async (req, res) => {
-    console.log('getChartData')
-    const api = `https://api.dex.guru/v1/tradingview/history?symbol=${req.body.address}-${req.body.network}_USD&resolution=60&from=${req.body.from}&to=${req.body.to}&countback=320`;
+
+    console.log('getChartData');
+
+    // const api = `https://api.dex.guru/v1/tradingview/history?symbol=${req.body.address}-${req.body.network}_USD&resolution=60&from=${req.body.from}&to=${req.body.to}&countback=320`;
+    const api = `https://api.dex.guru/v1/tradingview/history?symbol=0x56083560594e314b5cdd1680ec6a493bb851bbd8-bsc_USD&resolution=10&from=1648990444&to=1649170444&countback=300`;
+
+    // address: Network.address,
+    //     network: Network.network,
+    //     from: '1644872497',
+    //     to: (new Date().getTime() / 1000).toFixed(0)
+    // https://api.dex.guru/v1/tradingview/history?symbol=0x56083560594e314b5cdd1680ec6a493bb851bbd8-bsc_USD&resolution=60&from=1644872497&to=2644872497&countback=320
+
     await axios.get(api)
         .then(result => {
             console.log(result)
@@ -104,14 +117,29 @@ const getChartData = async (req, res) => {
 
 const getTradingHistory = async (req, res) => {
     try {
-        console.log('getTradingHistory')
+        console.log('getTradingHistory address: ', req.body.address);
+
         const api = `https://io3.dexscreener.io/u/search/pairs?q=${req.body.address}`
-        const result = await axios.get(api);
-        console.log('first res: ', result);
-        const History = `https://io12.dexscreener.io/u/trading-history/recent/${result.data.pairs[0].platformId}/${result.data.pairs[0].pairAddress}`;
-        const res_his = await axios.get(History)
-        console.log('second res: ', res_his);
-        res.send(res_his.data);
+        const result = await axios.get(api,
+            {
+
+            }, {
+            headers: {
+                'cookie': '__cf_bm=yEYcptjOrjUIrru8N4hDzGRB3TS1c8iEWGH1zzQO71w-1649152786-0-AQWUgPgXrw8ECvFNZlAaTTWou+5Z2UFL09sJ6WwUMynkyXUhef55EK1YwQ9f/ki6mv/b6XovMhFE/PSpDU+d5pQ='
+            }
+        }
+        );
+        console.log('first res: ', result.data);
+        // const History = `https://io12.dexscreener.io/u/trading-history/recent/${result.data.pairs[0].platformId}/${result.data.pairs[0].pairAddress}`;
+        // const res_his = await axios.get(History,
+        //     {
+        //         headers: {
+        //             'Cookie': '__cf_bm=OlJh0WPyhNrrCr5KM1v4VK9Z9AnnyHcAeuSo9DbKBAI-1649146654-0-AUr+Nr5pjyuEyLgp/MX4tzDeslcMRTbnYTjPSGVs+l0U8GTT1F7217Lpx3SDKcxWaJVokyfajJS+gZAwtpAGvLE=; path=/; expires=Tue, 05-Apr-22 08:47:34 GMT; domain=.dexscreener.io; HttpOnly; Secure; SameSite=None'
+        //         },
+        //     }
+        // )
+        // console.log('second res: ', res_his);
+        // res.send(res_his.data);
     } catch (error) {
         console.log(error)
         res.send(error)
