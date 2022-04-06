@@ -124,7 +124,7 @@ const getTradingHistory = async (req, res) => {
         const api = `https://www.dextools.io/chain-bsc/api/Pancakeswap/1/pairexplorer?v=2.10.0&pair=0x62be1533f3a78de99ca297ebbe489a3fb7253bef&ts=1649259998-0&h=1`;
 
         const result = await axios.get(api);
-        console.log('first res: ', result);
+        console.log('first res: ', result.data);
         res.send(result.data);
 
         // const History = `https://io12.dexscreener.io/u/trading-history/recent/${result.data.pairs[0].platformId}/${result.data.pairs[0].pairAddress}`;
