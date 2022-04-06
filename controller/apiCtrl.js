@@ -95,9 +95,11 @@ const GetOptionlist = async (req, res) => {
 const getChartData = async (req, res) => {
 
     console.log('getChartData');
+    const { address, network, from, to } = req.body;
 
-    // const api = `https://api.dex.guru/v1/tradingview/history?symbol=${req.body.address}-${req.body.network}_USD&resolution=60&from=${req.body.from}&to=${req.body.to}&countback=320`;
-    const api = `https://api.dex.guru/v1/tradingview/history?symbol=0x56083560594e314b5cdd1680ec6a493bb851bbd8-bsc_USD&resolution=10&from=1648990444&to=1649170444&countback=300`;
+    const api = `https://api.dex.guru/v1/tradingview/history?symbol=${address}-${network}_USD&resolution=60&from=${from}&to=${to}&countback=320`;
+    // const api = `https://api.dex.guru/v1/tradingview/history?symbol=0x56083560594e314b5cdd1680ec6a493bb851bbd8-bsc_USD&resolution=10&from=1648990444&to=1649170444&countback=300`;
+    console.log(api)
 
     // address: Network.address,
     //     network: Network.network,
@@ -107,7 +109,6 @@ const getChartData = async (req, res) => {
 
     await axios.get(api)
         .then(result => {
-            console.log(result)
             res.send(result.data)
         })
         .catch((err) => {
@@ -119,17 +120,13 @@ const getTradingHistory = async (req, res) => {
     try {
         console.log('getTradingHistory address: ', req.body.address);
 
-        const api = `https://io3.dexscreener.io/u/search/pairs?q=${req.body.address}`
-        const result = await axios.get(api,
-            {
+        // const api = `https://io3.dexscreener.io/u/search/pairs?q=${req.body.address}`
+        const api = `https://www.dextools.io/chain-bsc/api/Pancakeswap/1/pairexplorer?v=2.10.0&pair=0x62be1533f3a78de99ca297ebbe489a3fb7253bef&ts=1649259998-0&h=1`;
 
-            }, {
-            headers: {
-                'cookie': '__cf_bm=yEYcptjOrjUIrru8N4hDzGRB3TS1c8iEWGH1zzQO71w-1649152786-0-AQWUgPgXrw8ECvFNZlAaTTWou+5Z2UFL09sJ6WwUMynkyXUhef55EK1YwQ9f/ki6mv/b6XovMhFE/PSpDU+d5pQ='
-            }
-        }
-        );
-        console.log('first res: ', result.data);
+        const result = await axios.get(api);
+        console.log('first res: ', result);
+        res.send(result.data);
+
         // const History = `https://io12.dexscreener.io/u/trading-history/recent/${result.data.pairs[0].platformId}/${result.data.pairs[0].pairAddress}`;
         // const res_his = await axios.get(History,
         //     {
