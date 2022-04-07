@@ -138,7 +138,8 @@ const get_trading_history = async (req, res) => {
             console.log('api3 ', api3)
 
             const result3 = await axios.get(api3);
-            console.log('result2.data : ', result2.data);
+            console.log('result2 : ', result2);
+
             res.send(result3.data);
         } else {
             res.send([]);
