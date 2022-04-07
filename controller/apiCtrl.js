@@ -118,8 +118,8 @@ const getChartData = async (req, res) => {
 
 const get_trading_history = async (req, res) => {
     try {
-        console.log('req.body : ', req.body);
-        const { address, network } = req.body;
+        console.log('req.body : ', req.body.data);
+        const { address, network } = req.body.data;
         console.log('get_trading_history address: ', address);
         console.log('get_trading_history network: ', network);
         // const api = `https://io3.dexscreener.io/u/search/pairs?q=${req.body.address}`
