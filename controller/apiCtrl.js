@@ -116,12 +116,12 @@ const getChartData = async (req, res) => {
         })
 }
 
-const get_trading_history = async (req, res) => {
+const get_trending_history = async (req, res) => {
     try {
         console.log('req.body : ', req.body.data);
         const { address, network } = req.body.data;
-        console.log('get_trading_history address: ', address);
-        console.log('get_trading_history network: ', network);
+        console.log('get_trending_history address: ', address);
+        console.log('get_trending_history network: ', network);
         // const api = `https://io3.dexscreener.io/u/search/pairs?q=${req.body.address}`
         // pair search :
         const api1 = `https://www.dextools.io/chain-${network}/api/pair/search?s=${address}`;
@@ -228,7 +228,7 @@ module.exports = {
     GetToken,
     GetOptionlist,
     getChartData,
-    get_trading_history,
+    get_trending_history,
     UploadAds,
     imageMulti,
     getAds
