@@ -119,9 +119,11 @@ const getChartData = async (req, res) => {
 const get_trending_history = async (req, res) => {
     try {
         console.log('req.body : ', req.body);
-        // console.log('req.body : ', req.body.data);
-        // const { address, network } = req.body.data;
-        const { address, network } = req.body;
+        console.log('req.body : ', req.body.data);
+
+        const { address, network } = req.body.data;
+        // const { address, network } = req.body;
+
         console.log('get_trending_history address: ', address);
         console.log('get_trending_history network: ', network);
         // const api = `https://io3.dexscreener.io/u/search/pairs?q=${req.body.address}`
