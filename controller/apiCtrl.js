@@ -118,7 +118,6 @@ const getChartData = async (req, res) => {
 
 const get_trading_history = async (req, res) => {
     try {
-        console.log('req : ', req);
         console.log('req.body : ', req.body);
         const { address, network } = req.body;
         console.log('get_trading_history address: ', address);
@@ -156,6 +155,7 @@ const get_trading_history = async (req, res) => {
         // res.send(res_his.data);
     } catch (error) {
         // console.log(error)
+        console.log('error Fund')
         res.send(error)
     }
 }
