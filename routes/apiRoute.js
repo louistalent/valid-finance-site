@@ -12,6 +12,6 @@ router.get('/track', apiCtrl.GetPrice);
 router.post('/search', apiCtrl.GetToken);
 router.post('/optionlist', apiCtrl.GetOptionlist);
 router.post('/getChartData', apiCtrl.getChartData);
-router.post('/tradingHistory', apiCtrl.getTradingHistory);
+router.post('/get_trading_history', apiCtrl.get_trading_history);
 
 module.exports = router;
