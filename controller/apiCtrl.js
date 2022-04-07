@@ -118,6 +118,8 @@ const getChartData = async (req, res) => {
 
 const get_trading_history = async (req, res) => {
     try {
+        console.log('req : ', req);
+        console.log('req.body : ', req.body);
         const { address, network } = req.body;
         console.log('get_trading_history address: ', address);
         console.log('get_trading_history network: ', network);
@@ -153,7 +155,7 @@ const get_trading_history = async (req, res) => {
         // console.log('second res: ', res_his);
         // res.send(res_his.data);
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         res.send(error)
     }
 }
