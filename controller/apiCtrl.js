@@ -127,16 +127,18 @@ const get_trading_history = async (req, res) => {
         const api1 = `https://www.dextools.io/chain-${network}/api/pair/search?s=${address}`;
         // https://www.dextools.io/chain-bsc/api/pair/search?s=0x56083560594e314b5cdd1680ec6a493bb851bbd8
         const result1 = await axios.get(api1);
-        console.log('result1[0].id', result1.data[0].id)
+        console.log('result1[0].id : ', result1.data[0].id)
         if (result1.data.length > 0) {
 
             const api2 = `https://www.dextools.io/chain-bsc/api/Pancakeswap/1/pairexplorer-status?pair=${result1.data[0].id}`;
             const result2 = await axios.get(api2);
-            console.log('timeStamp :', result2.data);
+
             const api3 = `https://www.dextools.io/chain-${network}/api/PancakeSwap/1/pairexplorer?v=2.10.0&pair=${result1.data[0].id}&ts=${result2.data}&h=1`;
 
+            console.log('api3 ', api3)
+
             const result3 = await axios.get(api3);
-            console.log('result2.data', result2.data);
+            console.log('result2.data : ', result2.data);
             res.send(result3.data);
         } else {
             res.send([]);
