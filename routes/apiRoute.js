@@ -8,7 +8,7 @@ const path = require("path");
 router.post("/add", apiCtrl.Addtoken);
 router.get("/get", apiCtrl.GetData);
 router.post('/remove', apiCtrl.Removetoken);
-router.get('/track', apiCtrl.GetPrice);
+router.post('/track', apiCtrl.GetPrice);
 router.post('/search', apiCtrl.GetToken);
 router.post('/optionlist', apiCtrl.GetOptionlist);
 router.post('/getChartData', apiCtrl.getChartData);
